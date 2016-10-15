@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <body ng-app='photo_album'>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src='app.js' type='text/javascript'></script>
+    <link rel='stylesheet' type='text/css' href='style.css'>
+    <div ng-controller='photo_album_controller'>
+
+      <div ng-view></div>
+
+      <div ng-repeat='photo in photos'>
+        <div ng-class='{active: activePhoto === photo}'>
+          <div>
+            <table id='carTables'>
+              <tr ng-init='setActive(photo); activeRating(photo)'>
+                <td>
+                  <h2 ng-click='setActive(photo); activeRating(photo)'>
+                    {{ photo.title }}
+                  </h2>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <img class='images' ng-src='{{ activePhoto.url }}'/>
+      <h3 class='rating'>{{ photoRating.rating }}</h3>
+      <input class='changeRating' type='number' ng-model='inputVal' placeholder='Change Rating'></input>
+      <input class='changeRating' type='submit' ng-click='updateRating(inputVal)'></input>
+    </div>
+  </body>
+</html>
